@@ -1,13 +1,13 @@
-FROM microsoft/aspnetcore:2.0.0
+FROM microsoft/aspnetcore-build:2 AS builder
+WORKDIR /source
 
-ENV ASPNETCORE_ENVIRONMENT Production
+COPY *.csproj .
+RUN dotnet restore
 
-COPY ./entrypoint.sh /
+COPY . .
+RUN dotnet publish --output /app/ --configuration Release
 
-RUN chmod +x /entrypoint.sh
-
+FROM microsoft/aspnetcore:2
 WORKDIR /app
-
-COPY ./bin/Release/netcoreapp2.0/publish /app
-
-CMD ["dotnet", "PatreonService.dll"]
+COPY --from=builder /app .
+ENTRYPOINT ["dotnet", "PatreonService.dll"]
