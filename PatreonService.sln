@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatreonService", "PatreonService.csproj", "{9B476F30-15F6-40D7-81ED-EEE26A2E7F31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatreonService", "src/PatreonService.csproj", "{9B476F30-15F6-40D7-81ED-EEE26A2E7F31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
