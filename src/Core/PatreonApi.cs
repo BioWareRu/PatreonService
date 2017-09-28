@@ -148,7 +148,7 @@ namespace PatreonService.Core
         public string Description { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public int Amount => (int) Math.Ceiling(AmountCents * ((double) CompletedPercentage / 100) / 100);
 
         [JsonProperty("amount_cents")]
         public int AmountCents { get; set; }
