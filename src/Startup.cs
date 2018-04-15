@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using PatreonService.Core;
 
 namespace PatreonService
@@ -32,6 +33,7 @@ namespace PatreonService
                 config.ForcePathStyle = true;
                 config.ServiceURL = Configuration.GetValue<string>("S3_SERVICE_URL");
             }
+
             var amazonS3Client = new AmazonS3Client(Configuration.GetValue<string>("S3_ACCESS_KEY"),
                 Configuration.GetValue<string>("S3_SECRET_KEY"), config);
             services.AddSingleton(amazonS3Client);
@@ -45,7 +47,11 @@ namespace PatreonService
                 o.S3BucketName = Configuration["PATREON_S3_BUCKET_NAME"];
                 o.S3ObjectKey = Configuration["PATREON_S3_OBJECT_KEY"];
             });
+            
+            services.AddSingleton<PatreonOauthTokenProvider>();
             services.AddSingleton<PatreonApi>();
+            services.AddSingleton<IHostedService, PatreonTokenRefreshService>();
+
 
             services.AddMvc();
         }
