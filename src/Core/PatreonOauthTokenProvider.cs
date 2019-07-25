@@ -70,10 +70,12 @@ namespace PatreonService.Core
                         await response.Content.ReadAsStringAsync());
                 await SetTokenDataToS3Async(_tokenData);
             }
-
-            _logger.LogError(
-                $"Can't referesh patreon token. Status code: {response.StatusCode.ToString()}. Response: {await response.Content.ReadAsStringAsync()}");
-            throw new Exception("Patreon refresh token error");
+            else
+            {
+                _logger.LogError(
+                    $"Can't referesh patreon token. Status code: {response.StatusCode.ToString()}. Response: {await response.Content.ReadAsStringAsync()}");
+                throw new Exception("Patreon refresh token error");
+            }
         }
     }
 
