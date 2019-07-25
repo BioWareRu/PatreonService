@@ -57,6 +57,6 @@ stages:
                       containerRegistry: 'BioWareRU DockerHub'
                       repository: 'biowareru/patreon-service'
                       command: 'buildAndPush'
-                      Dockerfile: 'src/PatreonService/Dockerfile'
+                      Dockerfile: 'src/Dockerfile'
                       buildContext: '$(Pipeline.Workspace)/publish'
                       tags: '$(Version)'
