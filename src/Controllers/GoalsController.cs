@@ -11,7 +11,7 @@ namespace PatreonService.Controllers
     public class GoalsController : Controller
     {
         [HttpGet("current")]
-        public async Task<IActionResult> Current([FromServices] IMemoryCache cache,
+        public async Task<IActionResult> CurrentAsync([FromServices] IMemoryCache cache,
             [FromServices] PatreonApi patreonApi, [FromServices] ILogger<GoalsController> logger)
         {
             var currentGoal = cache.Get<PatreonGoal>("patreonCurrentGoal");

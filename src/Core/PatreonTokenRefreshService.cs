@@ -12,7 +12,7 @@ namespace PatreonService.Core
     {
         private readonly PatreonOauthTokenProvider _tokenProvider;
         private readonly ILogger<PatreonTokenRefreshService> _logger;
-        private Task _task;
+        private Timer _timer;
 
         public PatreonTokenRefreshService(PatreonOauthTokenProvider tokenProvider,
             ILogger<PatreonTokenRefreshService> logger)
@@ -23,25 +23,35 @@ namespace PatreonService.Core
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            await _tokenProvider.LoadOAuthData();
-            _task = Task.Run(async () =>
+            if (_timer != null)
             {
-                _logger.LogInformation("Start token refresher");
-                while (!cancellationToken.IsCancellationRequested)
-                {
-                    _logger.LogInformation("Request token refresh");
-                    await _tokenProvider.RefreshAccessToken();
-                    _logger.LogInformation("Token refreshed. Sleep.");
-                    await Task.Delay(TimeSpan.FromDays(10), cancellationToken);
-                }
+                await _timer.DisposeAsync();
+            }
 
-                _logger.LogInformation("Stop token refresher");
-            }, cancellationToken);
+            var dataLoaded = await _tokenProvider.LoadOAuthDataAsync();
+            if (!dataLoaded)
+            {
+                throw new Exception("Can't load oauth data. Stop app");
+            }
+
+            _logger.LogInformation("Start token refresher");
+            // ReSharper disable once VSTHRD101
+            _timer = new Timer(async state => { await RefreshTokenAsync(); }, null, TimeSpan.Zero,
+                TimeSpan.FromDays(10));
+        }
+
+        private async Task RefreshTokenAsync()
+        {
+            _logger.LogInformation("Request token refresh");
+            await _tokenProvider.RefreshAccessTokenAsync();
+            _logger.LogInformation("Token refreshed. Sleep.");
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            return _task;
+            _logger.LogInformation("Stop token refresher");
+            _timer?.Change(Timeout.Infinite, 0);
+            return Task.CompletedTask;
         }
     }
 }

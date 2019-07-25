@@ -1,43 +1,17 @@
-﻿using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using System.Threading.Tasks;
+using BioEngine.BRC.Common;
 
 namespace PatreonService
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
+            var bioEngine = new BioEngine.Core.BioEngine(args)
+                .AddLogging()
+                .AddS3Client();
 
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return new WebHostBuilder().UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    var env = hostingContext.HostingEnvironment;
-                    config.AddEnvironmentVariables();
-                    if (env.IsDevelopment())
-                    {
-                        var assembly = Assembly.Load(new AssemblyName(env.ApplicationName));
-                        if (assembly != null)
-                            config.AddUserSecrets(assembly, true);
-                    }
-                })
-                .ConfigureLogging((hostingContext, logging) =>
-                {
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                    if (hostingContext.HostingEnvironment.IsDevelopment())
-                    {
-                        logging.AddDebug();
-                    }
-                })
-                .UseStartup<Startup>()
-                .Build();
+            await bioEngine.RunAsync<Startup>();
         }
     }
 }

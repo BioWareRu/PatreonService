@@ -1,13 +1,5 @@
-FROM microsoft/aspnetcore-build:2.0.6-2.1.104 AS builder
-WORKDIR /source
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
 
-COPY *.csproj .
-RUN dotnet restore
-
-COPY . .
-RUN dotnet publish --output /app/ --configuration Release
-
-FROM microsoft/aspnetcore:2.0.6
 WORKDIR /app
-COPY --from=builder /app .
+COPY . .
 ENTRYPOINT ["dotnet", "PatreonService.dll"]

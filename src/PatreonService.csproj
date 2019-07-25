@@ -1,17 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="AWSSDK.S3" Version="3.3.26.10" />
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-  </ItemGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
-  </ItemGroup>
-  <PropertyGroup>
-    <UserSecretsId>3cdd8a9c-c6b7-48d3-b85c-f5615432d438</UserSecretsId>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <UserSecretsId>bw</UserSecretsId>
+        <LangVersion>8.0</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="BioEngine.Core.Api" Version="3.0.*" Condition="!Exists('..\..\..\..\BioEngine\BioEngine.Core')" />
+        <PackageReference Include="BioEngine.BRC.Common" Version="3.0.*" Condition="!Exists('..\..\..\BioEngine.BRC.Common')" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\BioEngine\BioEngine.Core\src\BioEngine.Core.Api\BioEngine.Core.Api.csproj" Condition="Exists('..\..\..\BioEngine\BioEngine.Core')" />
+        <ProjectReference Include="..\..\BioEngine.BRC.Common\src\BioEngine.BRC.Common\BioEngine.BRC.Common.csproj" Condition="Exists('..\..\BioEngine.BRC.Common')" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\azure-pipelines.yml">
+            <Link>azure-pipelines.yml</Link>
+        </Content>
+    </ItemGroup>
 </Project>

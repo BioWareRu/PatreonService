@@ -29,7 +29,7 @@ namespace PatreonService.Core
                 return await response.Content.ReadAsStringAsync();
             }
 
-            throw new Exception($"Error accessing patreon: {response.StatusCode}");
+            throw new Exception($"Error accessing patreon: {response.StatusCode.ToString()}");
         }
 
         private HttpClient GetHttpClient()
