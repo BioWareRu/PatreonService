@@ -5,8 +5,8 @@
         <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="BioEngine.Core.Api" Version="3.0.*" Condition="!Exists('..\..\..\..\BioEngine\BioEngine.Core')" />
-        <PackageReference Include="BioEngine.BRC.Common" Version="3.0.*" Condition="!Exists('..\..\..\BioEngine.BRC.Common')" />
+        <PackageReference Include="BioEngine.BRC.Common" Version="3.0.9114" />
+        <PackageReference Include="BioEngine.Core.Api" Version="3.0.9099" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\..\BioEngine\BioEngine.Core\src\BioEngine.Core.Api\BioEngine.Core.Api.csproj" Condition="Exists('..\..\..\BioEngine\BioEngine.Core')" />
