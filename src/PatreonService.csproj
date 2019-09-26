@@ -6,7 +6,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="BioEngine.BRC.Common" Version="3.0.9610" />
-        <PackageReference Include="BioEngine.Core.Api" Version="3.0.9596" />
+        <PackageReference Include="BioEngine.Core.Api" Version="3.0.9725" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\..\BioEngine\BioEngine.Core\src\BioEngine.Core.Api\BioEngine.Core.Api.csproj" Condition="Exists('..\..\..\BioEngine\BioEngine.Core')" />
