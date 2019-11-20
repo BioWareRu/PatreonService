@@ -9,8 +9,8 @@ namespace PatreonService
 {
     public class Startup : BioEngineApiStartup
     {
-        public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment) : base(configuration,
-            hostEnvironment)
+        public Startup(IConfiguration configuration, IHostEnvironment environment) : base(configuration,
+            environment)
         {
         }
 
