@@ -12,7 +12,7 @@ stages:
                   displayName: 'Install .Net Core 3.0'
                   inputs:
                       packageType: sdk
-                      version: 3.1.100-preview3-014645
+                      version: 3.1.100
                       includePreviewVersions: true
 
                 - task: DotNetCoreCLI@2
