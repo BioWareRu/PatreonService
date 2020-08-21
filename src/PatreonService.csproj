@@ -5,7 +5,7 @@
         <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="BioEngine.BRC.Common" Version="3.1.12173" />
+        <PackageReference Include="BioEngine.BRC.Common" Version="3.1.12300" />
         <PackageReference Include="BioEngine.Core.Api" Version="3.1.12164" />
     </ItemGroup>
     <ItemGroup>
