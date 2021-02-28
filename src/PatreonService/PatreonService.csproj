@@ -5,6 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <UserSecretsId>patreon</UserSecretsId>
+        <DisableAppCheck>true</DisableAppCheck>
     </PropertyGroup>
 
     <ItemGroup>
