@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace PatreonService.Core
@@ -71,19 +71,20 @@ namespace PatreonService.Core
 
     public class PatreonGoal
     {
-        [JsonProperty("description")] public string Description { get; set; }
+        [JsonPropertyName("description")] public string Description { get; set; }
 
-        [JsonProperty("current_amount")]
+        [JsonPropertyName("current_amount")]
         public int CurrentAmount => (int) Math.Ceiling(AmountCents * ((double) CompletedPercentage / 100) / 100);
 
-        [JsonProperty("amount")] public int Amount => AmountCents / 100;
+        [JsonPropertyName("amount")] public int Amount => AmountCents / 100;
 
-        [JsonProperty("amount_cents")] public int AmountCents { get; set; }
+        [JsonPropertyName("amount_cents")] public int AmountCents { get; set; }
 
-        [JsonProperty("completed_percentage")] public int CompletedPercentage { get; set; }
+        [JsonPropertyName("completed_percentage")]
+        public int CompletedPercentage { get; set; }
 
-        [JsonProperty("reached_at")] public DateTime? ReachedAt { get; set; }
+        [JsonPropertyName("reached_at")] public DateTime? ReachedAt { get; set; }
 
-        [JsonProperty("created_at")] public DateTime? CreatedAt { get; set; }
+        [JsonPropertyName("created_at")] public DateTime? CreatedAt { get; set; }
     }
 }
