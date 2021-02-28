@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace PatreonService.Core
 {
-    [UsedImplicitly]
     public class PatreonTokenRefreshService : IHostedService
     {
         private readonly PatreonOauthTokenProvider _tokenProvider;
         private readonly ILogger<PatreonTokenRefreshService> _logger;
-        private Timer _timer;
+        private Timer? _timer;
 
         public PatreonTokenRefreshService(PatreonOauthTokenProvider tokenProvider,
             ILogger<PatreonTokenRefreshService> logger)
@@ -36,7 +34,7 @@ namespace PatreonService.Core
 
             _logger.LogInformation("Start token refresher");
             // ReSharper disable once VSTHRD101
-            _timer = new Timer(async state => { await RefreshTokenAsync(); }, null, TimeSpan.Zero,
+            _timer = new Timer(async _ => { await RefreshTokenAsync(); }, null, TimeSpan.Zero,
                 TimeSpan.FromDays(10));
         }
 
@@ -44,7 +42,7 @@ namespace PatreonService.Core
         {
             _logger.LogInformation("Request token refresh");
             await _tokenProvider.RefreshAccessTokenAsync();
-            _logger.LogInformation("Token refreshed. Sleep.");
+            _logger.LogInformation("Token refreshed. Sleep");
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

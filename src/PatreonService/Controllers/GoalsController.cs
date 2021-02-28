@@ -24,9 +24,10 @@ namespace PatreonService.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError($"Error while loading patreon goals: {ex.Message}");
+                    logger.LogError("Error while loading patreon goals: {ErrorText}", ex.Message);
                 }
             }
+
             return Ok(currentGoal);
         }
     }

@@ -1,22 +1,22 @@
 ﻿using System;
-using BioEngine.Core.Api;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PatreonService.Core;
+using Sitko.Core.App.Web;
 
 namespace PatreonService
 {
-    public class Startup : BioEngineApiStartup
+    public class Startup : BaseStartup<PatreonApplication>
     {
         public Startup(IConfiguration configuration, IHostEnvironment environment) : base(configuration,
             environment)
         {
         }
 
-        public override void ConfigureServices(IServiceCollection services)
+        protected override void ConfigureAppServices(IServiceCollection services)
         {
-            base.ConfigureServices(services);
+            base.ConfigureAppServices(services);
             services.Configure<PatreonConfig>(o =>
             {
                 o.ClientId = Configuration["PATREON_API_CLIENT_ID"];

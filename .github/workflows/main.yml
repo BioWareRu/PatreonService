@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/sitkoru/actions-container
+    env:
+      PROJECT: "PatreonService"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+      - name: Publish app
+        run: dotnet publish src/${{ env.PROJECT}}/${{ env.PROJECT}}.csproj --output /app/ --configuration Release

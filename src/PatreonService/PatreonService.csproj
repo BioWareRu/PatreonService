@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>patreon</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Sitko.Core.App.Web" Version="6.9.0"/>
+        <PackageReference Include="Sitko.Core.Storage.S3" Version="6.9.0"/>
+    </ItemGroup>
+
+
+</Project>

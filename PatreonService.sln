@@ -3,7 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatreonService", "src/PatreonService.csproj", "{9B476F30-15F6-40D7-81ED-EEE26A2E7F31}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{BED6AB38-EECB-42F7-9495-ED57B74CFBD5}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	LICENSE = LICENSE
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0BD55DBE-FE81-4F9E-84A0-33F3B2B37A92}"
+ProjectSection(SolutionItems) = preProject
+	.github\dependabot.yml = .github\dependabot.yml
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9774D819-857A-4FA6-A56C-CEFC39F7B50C}"
+ProjectSection(SolutionItems) = preProject
+	.github\workflows\deploy.yml = .github\workflows\deploy.yml
+	.github\workflows\main.yml = .github\workflows\main.yml
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CA366445-E37E-4DC3-B455-FF00798B9A5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatreonService", "src\PatreonService\PatreonService.csproj", "{B20F42F8-1052-4FF4-8FA5-BCF8062FA736}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +30,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9B476F30-15F6-40D7-81ED-EEE26A2E7F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B476F30-15F6-40D7-81ED-EEE26A2E7F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B476F30-15F6-40D7-81ED-EEE26A2E7F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B476F30-15F6-40D7-81ED-EEE26A2E7F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B20F42F8-1052-4FF4-8FA5-BCF8062FA736}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{B20F42F8-1052-4FF4-8FA5-BCF8062FA736}.Debug|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9774D819-857A-4FA6-A56C-CEFC39F7B50C} = {0BD55DBE-FE81-4F9E-84A0-33F3B2B37A92}
+		{B20F42F8-1052-4FF4-8FA5-BCF8062FA736} = {CA366445-E37E-4DC3-B455-FF00798B9A5D}
 	EndGlobalSection
 EndGlobal
