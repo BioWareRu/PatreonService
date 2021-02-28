@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json.Linq;
 
 namespace PatreonService.Core
 {
@@ -39,20 +39,6 @@ namespace PatreonService.Core
             return httpClient;
         }
 
-
-        private static List<T> GetIncluded<T>(string json, string type)
-        {
-            var jToken = JToken.Parse(json);
-            var included = jToken["included"].AsJEnumerable();
-
-            return (from value in included
-                where value["type"].ToString() == type
-                select value["attributes"].ToObject<T>()
-                into obj
-                where obj != null
-                select obj).ToList();
-        }
-
         public async Task<PatreonGoal> GetCurrentGoalAsync()
         {
             var goals = await GetGoalsAsync();
@@ -65,8 +51,20 @@ namespace PatreonService.Core
         {
             var json = await GetReponseJsonAsync("/api/current_user/campaigns?include-goals");
 
-            return GetIncluded<PatreonGoal>(json, "goal");
+            var response = JsonSerializer.Deserialize<PatreonResponse<PatreonGoal>>(json);
+            return response.Included.Where(i => i.Type == "goal").Select(i => i.Attributes).ToList();
         }
+    }
+
+    public class PatreonResponse<T>
+    {
+        [JsonPropertyName("included")] public List<PatreonObject<T>> Included { get; set; }
+    }
+
+    public class PatreonObject<T>
+    {
+        [JsonPropertyName("type")] public string Type { get; set; }
+        [JsonPropertyName("attributes")] public T Attributes { get; set; }
     }
 
     public class PatreonGoal
