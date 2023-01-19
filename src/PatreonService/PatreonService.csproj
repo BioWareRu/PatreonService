@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Sitko.Core.App.Web" Version="6.9.0"/>
+        <PackageReference Include="Sitko.Core.App.Web" Version="9.20.1"/>
         <PackageReference Include="Sitko.Core.Storage.S3" Version="6.9.0"/>
     </ItemGroup>
 
